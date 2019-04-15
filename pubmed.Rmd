@@ -1,0 +1,22 @@
+```{r}
+library(KoNLP)
+library(tm)
+library(wordcloud)
+```
+
+```{r}
+pubmed <- file("C:/Users/wonjun/Desktop/paper/PubMed/pubmed_result.txt")
+```
+
+```{r}
+pubmed_data <- readLines(pubmed)
+```
+
+```{r}
+pubmed_data2 <- sapply(pubmed_data, extractNoun, USE.NAMES=F)
+```
+
+```{r}
+head(unlist(pubmed_data2),30)
+```
+

@@ -1,0 +1,38 @@
+```{r}
+library(KoNLP)
+```
+
+```{r}
+library("wordcloud")
+```
+
+```{r}
+library("stringr")
+```
+#문자열을 처리해주는 패키지
+```{r}
+ocl <- file("C:/Users/wonjun/Desktop/Rproject/data/ocl.txt")
+```
+
+```{r}
+ocl_data <- readLines(ocl)
+```
+
+```{r}
+ocl_data2 <- sapply(ocl_data,extractNoun,USE.NAMES = F)
+```
+#extractNoun (KoNLP) : 명사를 추출해준다.
+```{r}
+ocl_data3 <- unlist(ocl_data2)
+```
+
+```{r}
+ocl_data4 <- str_replace_all(ocl_data3,"[^[:alpha:]]","")
+```
+#str_replace_all (stringr) : 일치하는 패턴을 문자열로 대체합니다.
+#str_replace_all(문자열,패턴,대체)
+#[^[:alpha:]] : 한글 영어 외에는 삭제
+```{r}
+ocl_data4
+```
+#gsub : gsub(찾을것,바꿀것) 여백 제거

@@ -1,0 +1,77 @@
+```{r}
+library(ggplot2)
+```
+
+```{r}
+help(Titanic)
+```
+
+```{r}
+titanic <- as.data.frame(Titanic)
+```
+
+```{r}
+names(titanic)
+```
+
+```{r}
+View(titanic)
+```
+#자료로부터 얻어낸 5가지 요약 수치를 가지고 그린 박스 그림(1,2,3사분위, 최댓,최솟), IQR(Interquartile range, 3-1) 1.5*IQR
+```{r}
+qplot(data = titanic, x = Class, y = Freq, geom = "boxplot", colour = Survived)
+```
+```{r}
+qplot(data = titanic, x = Sex, y = Freq, geom = "boxplot", colour = Survived)
+```
+
+```{r}
+qplot(data = titanic, x = Age, y = Freq, geom = "boxplot", colour = Survived)
+```
+```{r}
+help(mpg)
+```
+
+```{r}
+mpg <- as.data.frame(mpg)
+```
+
+```{r}
+names(mpg)
+```
+```{r}
+View(mpg)
+```
+
+```{r}
+qplot(data = mpg, x= hwy)
+```
+
+```{r}
+library(ggplot2)
+```
+
+
+```{r}
+midwest <- as.data.frame(ggplot2::midwest)
+```
+
+```{r}
+midwest$hen <- ((midwest$popasian/midwest$poptotal)*100)
+```
+
+```{r}
+hist(midwest$hen)
+```
+```{r}
+midwest$hen2 <- ifelse(midwest$hen >= 0.5, "large", "small")
+```
+
+```{r}
+View(midwest$hen2)
+```
+
+```{r}
+qplot(midwest$hen2)
+```
+

@@ -1,0 +1,26 @@
+```{r}
+library(arules)
+```
+
+```{r}
+homo <- read.transactions("C:/Users/wonjun/Desktop/Homo2.csv",sep=",")
+```
+
+```{r}
+summary(homo)
+```
+```{r}
+inspect(homo[1:5])
+```
+
+```{r}
+itemFrequencyPlot(homo,support=0.01)
+```
+
+```{r}
+itemFrequency(homo[,1:3])
+```
+```{r}
+
+```
+

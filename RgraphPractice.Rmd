@@ -1,0 +1,167 @@
+```{r}
+library(ggplot2)
+```
+
+```{r}
+str(mpg)
+```
+
+```{r}
+summary(mpg)
+```
+```{r}
+library(dplyr)
+```
+
+```{r}
+ggplot(data = mpg, aes( x= displ, y= hwy))+geom_point()
+```
+
+```{r}
+ggplot(data = economics, aes(x=date, y=unemploy))+geom_line()
+```
+
+```{r}
+ggplot(data = mpg, aes(x=displ,y=hwy))+geom_point()+xlim(3,6)+ylim(10,30)
+```
+
+```{r}
+df<- mpg %>% group_by(drv) %>% summarise(mean_hwy = mean(hwy))
+df
+```
+
+```{r}
+ggplot(data = df, aes(x= drv,y= mean_hwy)) + geom_col()
+```
+
+```{r}
+ggplot(data = mpg, aes(x=drv,y=hwy))+geom_boxplot()
+```
+
+```{r}
+group_a <- data_frame(id = c(1,2,3,4,5), test = c(60,80,70,90,85))
+group_b <- data_frame(id = c(1,2,3,4,5,6), test = c(70,83,65,95,70,50))
+```
+
+```{r}
+total <- left_join(group_a, group_b, by = "id")
+```
+
+```{r}
+total
+```
+
+```{r}
+library(KoNLP)
+library(dplyr)
+library(stringr)
+library(wordcloud)
+```
+
+```{r}
+txt <- readLines("C:/Users/wonjun/Desktop/Rproject/data/hiphop.txt")
+```
+
+```{r}
+txt1<-str_replace_all(txt,"\\W","")
+```
+
+```{r}
+useNIADic()
+```
+
+
+```{r}
+txt2 <- extractNoun(txt1)
+```
+
+```{r}
+txt3 <- table(unlist(txt2))
+```
+
+```{r}
+df <- as.data.frame(txt3, stringsAsFactors = F)
+```
+
+```{r}
+df2 <- rename(df, word = Var1, freq=Freq)
+```
+
+```{r}
+df3 <- filter(df2, nchar(word) >= 2)
+```
+
+
+```{r}
+pal <- brewer.pal(8,"Dark2")
+```
+
+```{r}
+wordcloud(words = df3$word,
+          freq = df3$freq,
+          min.freq = 2,
+          max.words = 200,
+          random.order=F,
+          rot.per=.1,
+          scale = c(4,0.3),
+          colors=pal)
+```
+
+```{r}
+library(ggiraphExtra)
+```
+
+```{r}
+str(USArrests)
+```
+```{r}
+USArrests
+```
+```{r}
+rm(list = ls())
+```
+
+
+```{r}
+library(tibble)
+```
+
+```{r}
+crime
+```
+
+
+```{r}
+crime <- rownames_to_column(USArrests, var="state")
+```
+
+```{r}
+crime$state <- tolower(crime$state)
+```
+
+```{r}
+crime
+```
+
+```{r}
+states_map <- map_data("state")
+```
+
+```{r}
+str(states_map)
+```
+
+```{r}
+ggChoropleth(data = crime,
+             aes(fill = Murder,
+                 map_id = state),
+                 map = states_map,
+                 interactive = T)
+```
+
+```{r}
+ggChoropleth(data = crime,
+             aes(fill = Murder,
+                 map_id = state),
+                 map = states_map)
+```

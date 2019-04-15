@@ -1,0 +1,102 @@
+```{r}
+health <- read.csv("C:/Users/wonjun/Desktop/Rproject/data/back/health.csv")
+```
+
+```{r}
+summary(health)
+```
+
+
+```{r}
+model1 <- lm(survival~.,data = health)
+```
+
+```{r}
+model1
+```
+
+```{r}
+summary(model1)
+```
+
+```{r}
+model2 <- lm(other_diseases~.,data = health)
+```
+
+```{r}
+summary(model2)
+```
+
+```{r}
+model3 <- lm(heart_disease~.,data = health)
+```
+
+```{r}
+summary(model3)
+```
+
+```{r}
+install.packages("igraph")
+```
+
+```{r}
+library(igraph)
+```
+
+```{r}
+health_net <- read.csv("C:/Users/wonjun/Desktop/Rproject/data/back/1network.csv")
+```
+
+```{r}
+g<- graph.data.frame(health_net)
+```
+
+```{r}
+plot(g)
+```
+
+```{r}
+V(g)$size <- degree(g)*5
+```
+
+```{r}
+plot(g)
+```
+
+
+```{r}
+V(g)$edge.arrow.mod
+```
+
+
+```{r}
+plot(g, layout=layout.kamada.kawai, vertex.label=V(g)$name, vertex.shape="none")
+```
+
+```{r}
+net <- read.csv("C:/Users/wonjun/Desktop/Rproject/data/back/network.csv")
+```
+
+```{r}
+g1<- graph.data.frame(net, directed=TRUE)
+```
+
+```{r}
+par(mar=c(0,0,0,0))
+plot(g1, layout=layout.circle,vertex.frame.color = "yellow", vertex.color = "yellow", edge.color = "black",vertex.size= degree(g1)*5, vertex.label.cex=1,vertex.label.color="black",edge.arrow.size=0.1)
+```
+
+```{r}
+net2 <- read.csv("C:/Users/wonjun/Desktop/Rproject/data/back/cancerNetwork.csv")
+```
+
+```{r}
+g2<- graph.data.frame(net2, directed=TRUE)
+```
+
+```{r}
+par(mar=c(0,0,0,0))
+plot(g2, layout=layout.circle,vertex.frame.color = "yellow", vertex.color = "yellow", edge.color = "black",vertex.size= degree(g1)*2, vertex.label.cex=1,vertex.label.color="black",edge.arrow.size=0.1)
+```
+```
+

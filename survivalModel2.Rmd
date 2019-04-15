@@ -1,0 +1,24 @@
+```{r}
+sur2<-read.csv("C:/Users/wonjun/Desktop/Rproject/data/back/cancer.csv", stringsAsFactors = TRUE)
+```
+
+```{r}
+model <- lm(survival~.,data=sur2)
+```
+
+```{r}
+summary(model)
+```
+
+```{r}
+model <- lm(pre_op_chemoRT~.,data=sur2)
+```
+
+```{r}
+summary(model)
+```
+
+```{r}
+
+```
+

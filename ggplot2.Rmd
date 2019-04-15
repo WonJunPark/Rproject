@@ -1,0 +1,74 @@
+
+```{r}
+library(ggplot2)
+```
+#ggplot2 : 그래프를 선언적으로 생성하는 시스템입니다.
+#ggplot2의 기본요소
+#1. data frame
+#2. aes (색깔, 크기)
+#3. geoms (점,선,모양)
+#4. stats (통계적 처리)
+#5. scale (aes에서 사용한 스케일)
+
+#1. data frame
+```{r}
+mtcars
+```
+#R 기본 내장함수
+```{r}
+plot(mtcars$wt, mtcars$mpg)
+```
+#qplot(x축,y축,data) : ggplot2에서 가장 기본적인 그래프
+```{r}
+qplot(wt,mpg,data=mtcars)
+```
+
+#2. aes
+```{r}
+diamonds
+```
+```{r}
+qplot(carat,price,data = diamonds)
+```
+```{r}
+qplot(carat, price, data = diamonds,colour=clarity)
+```
+
+#3. geoms
+```{r}
+ggplot(mtcars, aes(x = wt, y = mpg)) + geom_point()
+```
+
+```{r}
+ggplot(mtcars, aes(x = wt, y = mpg)) + geom_line()
+```
+
+```{r}
+ggplot(mtcars, aes(x = wt, y = mpg)) + geom_point(colour = "red",pch=3,size=10)
+```
+
+#stats
+#요약 데이터를 통계적으로 어떻게 변환해서 보여 줄 것인지를 설
+#count : 관측값의 개수
+#density : 밀도(전체합 1)
+#ncount : [0,1]로 스케일된 count
+#ndensity : [0,1]로 스케일된 ndensity
+```{r}
+ggplot()+stat_bin(data = diamonds, aes(x= price, y = ..count..))
+```
+```{r}
+ggplot()+stat_bin(data = diamonds, aes(x= price, y = ..ncount..))
+```
+
+#scale
+#데이터의 값을 표현하기 위해, 각각의 시각적인 요소들을 어떻게 변환해서 나타낼 것인가의 설명
+#축 제목, 축 제한, 눈금표시 
+```{r}
+ggplot(mtcars, aes(x = wt, y = mpg)) + geom_point() + ggtitle("hello title")
+```
+```{r}
+ggplot(mtcars, aes(x = wt, y = mpg)) + geom_point()+scale_x_continuous(sec.axis = dup_axis()) +scale_y_continuous(sec.axis = dup_axis())
+```
+#dup_axis 는 기본 축을 복제하여 효과적으로 기본 축을 미러링하는 보조 축을 생성하기위한 속기입니다.
+
+

@@ -1,0 +1,24 @@
+```{r}
+install.packages("ggmap")
+```
+
+```{r}
+install.packages("stringr")
+```
+
+```{r}
+library(ggmap)
+```
+
+```{r}
+library(stringr)
+```
+
+```{r}
+loc <- read.csv("C:/Users/wonjun/Desktop/Rproject/data/dongjak.csv")
+```
+
+```{r}
+getmap <- get_googlemap("seoul")
+```
+

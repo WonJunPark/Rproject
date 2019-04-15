@@ -1,0 +1,106 @@
+```{r}
+library(KoNLP)
+```
+#extractNoun : 한글을 형태소별로 추출한다.
+```{r}
+library(stringr)
+```
+
+```{r}
+library(dplyr)
+```
+#filter() : 지정한 조건식에 맞는 데이터 추출
+```{r}
+library(wordcloud)
+```
+
+```{r}
+kakao <- file("C:/Users/wonjun/Desktop/Rproject/data/kakao.txt")
+```
+
+```{r}
+ocl <- readLines(kakao)
+```
+
+```{r}
+ocl2 <- gsub("[[:punct:]]","",ocl)
+```
+#gsub(변경전,변경후,data)
+#punct :특수문자 제거
+```{r}
+ocl3 <- gsub("\\d","",ocl2)
+```
+#숫자 제거
+```{r}
+ocl4 <- gsub("\\.","",ocl3)
+```
+#구두점 제거
+```{r}
+ocl5 <- sapply(ocl4,extractNoun,USE.NAMES = F)
+```
+#한글을 형태소 별로 추출
+```{r}
+ocl6 <- unlist(ocl5)
+```
+
+```{r}
+ocl7 <- Filter(function(x){nchar(x)>=2 & nchar(x) <=7}, ocl6)
+```
+
+```{r}
+ocl8 <- table(ocl7)
+```
+#빈도 순으정 정렬해야 하기 때문에 table로 변환해줍니다.
+```{r}
+ocl9 <- sort(ocl8,decreasing=T)
+```
+
+```{r}
+top5 <- head(ocl9,5)
+```
+
+```{r}
+pie(top5,col=rainbow(5),radius=1,main="Happy OCL")
+```
+#col : 색상, radius : 지름, main : 제목
+#pie(출력값,여러옵션들)
+```{r}
+pct<-round(top5/sum(top5)*100,1)
+```
+#round : 소숫점 첫째자리 반올림
+```{r}
+lab <- paste(names(top5),"\n",pct,"%")
+```
+
+```{r}
+pie(top5,main="Happy OCL",col=rainbow(5),radius = 0.8,labels=lab)
+```
+
+```{r}
+bchart <- head(ocl9,5)
+```
+
+```{r}
+bp<- barplot(bchart,main="Happy OCL", col=rainbow(5), cex.names=0.7, ylim=c(0,10))
+```
+
+```{r}
+library(plotrix)
+```
+#3D Pie Chart 표현
+```{r}
+pi_pct<-round(bchart/sum(bchart)*100,1)
+```
+
+```{r}
+pi_names <- names(bchart)
+```
+
+```{r}
+pi_labels <- paste(pi_names,"\n","(","pi_cpt",")")
+```
+
+```{r}
+pie3D(bchart,main="Happy OCL",col=rainbow(10),cex=0.3,labels=pi_labels,explode=0.05)
+```
+#explode : 중심에서 벗어난 정도

@@ -1,0 +1,46 @@
+---
+output:
+  word_document: default
+  html_document: default
+---
+```{r}
+library(ggplot2)
+```
+
+```{r}
+library(dplyr)
+```
+
+```{r}
+airquality
+```
+```{r}
+ggplot(airquality, aes(Day,Temp))+geom_line()
+```
+
+```{r}
+ggplot(airquality, aes(Day,Temp, color = Month))+geom_point()
+```
+
+
+```{r}
+airquality %>% filter(Month==5) %>% ggplot(aes(Day,Temp))+geom_line()+ggtitle("5month temp")
+```
+
+```{r}
+ggplot(airquality, aes(Day,Temp, color=Month))+geom_line(aes(group=Month))
+```
+
+```{r}
+ggplot(airquality, aes(Day,Temp, color=Month))+geom_line(aes(group=Month))+xlim(0,max(200))
+```
+
+```{r}
+ggplot(airquality, aes(Day,Temp, color=Month))+geom_line(aes(group=Month))+ylim(0,max(200))
+```
+
+```{r}
+airquality %>% filter(Month==5) %>% ggplot(aes(Day,Temp))+geom_line(linetype=2)+ggtitle("5month temp")
+```
+```
+

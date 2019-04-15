@@ -1,0 +1,135 @@
+```{r}
+sur<-read.csv("C:/Users/wonjun/Desktop/Rproject/data/5yearup.csv", stringsAsFactors = TRUE)
+```
+
+```{r}
+summary(sur$survival)
+```
+
+
+```{r}
+hist(sur$survival)
+```
+
+```{r}
+model <- lm(survival~.,data=sur)
+```
+
+```{r}
+model
+```
+
+```{r}
+sur2<-read.csv("C:/Users/wonjun/Desktop/Rproject/data/5yeardown.csv", stringsAsFactors = TRUE)
+```
+
+```{r}
+model2 <- lm(survival~.,data=sur2)
+```
+
+```{r}
+model10 <- lm(age~.,data=sur2)
+```
+
+```{r}
+model10
+```
+
+
+```{r}
+model2
+```
+
+```{r}
+sur3 <- read.csv("C:/Users/wonjun/Desktop/Rproject/data/back/health.csv", stringsAsFactors = TRUE)
+```
+
+```{r}
+model3 <- lm(survival~.,data=sur3)
+```
+
+```{r}
+model3
+```
+```{r}
+cor.test(sur3$age, sur3$BMI)
+```
+
+```{r}
+summary(model3)
+```
+
+```{r}
+require(car)
+```
+
+```{r}   
+
+ 
+vif(model3)
+```
+
+
+```{r}
+gold <- read.csv("C:/Users/wonjun/Desktop/Rproject/data/gold.csv")
+```
+
+```{r}
+str(gold)
+```
+
+```{r}
+set.seed(123)
+```
+
+```{r}
+train_sample <- sample(2545,2000)
+```
+
+```{r}
+str(train_sample)
+```
+
+```{r}
+gold_train <- gold[train_sample,]
+```
+
+```{r}
+gold_test <- gold[-train_sample,]
+```
+
+```{r}
+prop.table(table(gold_train$sex))
+```
+
+```{r}
+library(C50)
+```
+
+```{r}
+Sys.setlocale('LC_ALL','C')
+```
+
+```{r}
+str(gold_train$dead)
+```
+
+```{r}
+gold_model <- C5.0(gold_train[-1], gold_train$dead)
+```
+
+```{r}
+model4 <- read.csv("C:/Users/wonjun/Desktop/Rproject/data/back/health2.csv")
+```
+
+```{r}
+cor.test(model4$dhigh_bl, model4$liver_disease)
+```
+```{r}
+cor.test(model4$lung_disease, model4$age)
+```
+
+```{r}
+
+```
+
